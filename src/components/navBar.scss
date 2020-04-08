@@ -1,0 +1,14 @@
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 2%;
+    margin-bottom: 2px solid yellow;
+    
+    .logo{
+        justify-content: left;
+    }
+    .tasks{
+        display: flex;
+    justify-content: space-between;
+    }
+}
