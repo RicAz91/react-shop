@@ -20,8 +20,8 @@ const list = async () => {
 
 
   const single = async id => {
-    const result = await instance.get(`/product/${id}`);
-    const product = result.data.product;
+    const result = await instance.get(`/products/${id}`);
+    const product = result.data;
     return product;
   };
   

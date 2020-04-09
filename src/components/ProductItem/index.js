@@ -1,34 +1,45 @@
-import React from 'react';
+import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
 
 
 
 import './style.scss';
 
-const ProductItem = props => {
-  console.log(props)
+class ProductItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: props
+    };
+    this.handleCartAddition = this.handleCartAddition.bind(this);
+  }
+  handleCartAddition() {
+    
+    this.props.updateCart(this.state.product);
+  }
+  render(){
   return (
-    // <Link
-    //   to={`/product/${props._id}`}
-    //   
-    // >
+    <Link
+      to={`/product/${this.props.id}`}
+      
+    >
     <div className='product__item'>
       <figure className="product__image">
-        <img src={props.product_pictures[0].picture.url} alt={props.base_product.name_pt} />
+        <img src={this.props.product_pictures[0].picture.url} alt={this.props.base_product.name_pt} />
       </figure>
       <header className="product__information">
         <div className="product__details">
-          <strong>{props.base_product.name_pt}</strong>
-  <img src={props.base_product.brand.picture.url} alt={props.base_product.brand.name} />
+          <strong>{this.props.base_product.name_pt}</strong>
+  <img src={this.props.base_product.brand.picture.url} alt={this.props.base_product.brand.name} />
           </div>
         <div className="product__price">
-          <span>{props.price}€</span>
+          <span>{this.props.price}€</span>
         </div>
       </header>
-      <button>Adicionar ao carrinho</button>
+      <button onClick={this.handleCartAddition} >Adicionar ao carrinho</button>
       </div>
-    //</Link>
+    </Link>
   );
 };
-
+}
 export default ProductItem;

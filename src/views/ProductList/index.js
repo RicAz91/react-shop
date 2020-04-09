@@ -15,7 +15,7 @@ class ProductListView extends Component {
       tag:''
     };
    this.handleInputChange = this.handleInputChange.bind(this)
-  
+   this.handleCartAddition = this.handleCartAddition.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +43,10 @@ handleInputChange(event) {
   })
 }
 
+handleCartAddition() {
+    
+  this.props.updateCart(this.state.product);
+}
 get brandFilter(){
   
 const brandFilter = this.state.products.filter(product => {
@@ -141,7 +145,7 @@ else {return (a, b) => b.added_to_store_at - a.added_to_store_at}
         </aside>
         <div className="product__list">
           {this.filteredProducts.sort(this.sortingFunction).map(product => (
-            <ProductItem key={product.id} {...product} />
+            <ProductItem key={product.id} updateCart={this.updateCart} {...this.props} {...product} />
           ))}
         </div>
       </div>
