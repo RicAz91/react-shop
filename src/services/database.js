@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const instance = axios.create({
-  baseURL: 'https://babyloop.pt/api/v1',
+  baseURL: 'https://cors-anywhere.herokuapp.com/' +'https://babyloop.pt/api/v1'
   });
 
 
@@ -14,8 +14,6 @@ const list = async () => {
     } catch (error) {
       throw error;
     }
-
-
 
   };
 
