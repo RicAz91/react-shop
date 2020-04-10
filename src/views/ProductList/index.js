@@ -46,17 +46,35 @@ handleInputChange(event) {
 handleCartAddition() {
     
   this.props.updateCart(this.state.product);
+  
 }
+
+get filterCart(){
+  
+ if(this.props.cart.length != 0){
+    const filterCart = this.state.products.filter(product => {
+ let a = this.props.cart.map(product =>{return (product.base_product.name_pt.toLowerCase())})
+       return !(a.includes(product.base_product.name_pt.toLowerCase()))
+    })
+  return filterCart
+}
+ return  this.state.products
+  }
+
+
+
 get brandFilter(){
   
-const brandFilter = this.state.products.filter(product => {
+const brandFilter = this.filterCart.filter(product => {
       
   return (product.base_product.brand.name.includes(this.state.brand))
 
 })
 return brandFilter
 
-}  
+} 
+
+
 get tagFilter(){
 
   const tagFilter = this.brandFilter.filter(product => {
