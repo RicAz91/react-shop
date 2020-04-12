@@ -8,6 +8,7 @@ class ProductListView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loaded:false,
       products: [],
       query:'',
       order: '',
@@ -21,12 +22,14 @@ class ProductListView extends Component {
   componentDidMount() {
     this.fetchData();
   }
-
+ 
   fetchData() {
+    
     listProducts()
       .then(products => {
         this.setState({
-          products
+          products,
+          loaded: true
         });
       })
       .catch(error => {
@@ -45,13 +48,13 @@ handleInputChange(event) {
 
 handleCartAddition() {
     
-  this.props.updateCart(this.state.product);
+  this.props.updateCart(this.state.products);
   
 }
 
 get filterCart(){
   
- if(this.props.cart.length != 0){
+ if(this.props.cart.length !== 0){
     const filterCart = this.state.products.filter(product => {
  let a = this.props.cart.map(product =>{return (product.base_product.name_pt.toLowerCase())})
        return !(a.includes(product.base_product.name_pt.toLowerCase()))
@@ -112,24 +115,31 @@ else {return (a, b) => b.added_to_store_at - a.added_to_store_at}
 
   
   render() {
-    console.log('state',this.state)
+    console.log('state',this.props.cart)
     return (
-      <div>
-        
-        <form>
+      
+      <div className='productPage'>
+     {this.state.loaded && (
+
+      
+        <div className='productPage_content'>
+       
+        <aside className='productPage_content__aside'>
+      
+        <form className='productPage_search'>
           <input
           type = 'search'
           name = 'query'
           value = {this.state.query}
           onChange = {this.handleInputChange}
-          placeholder = 'Escreva aqui o que procura.'
+          placeholder = 'Procurar...'
           />
         </form>
-        <aside>
 
-
+<div>
+  <div>
 <label htmlFor="brand">Escolha uma marca</label>
-<select onChange = {this.handleInputChange} id="brand" name="brand" form="brand">
+<select className='productPage_select' onChange = {this.handleInputChange} id="brand" name="brand" form="brand">
   <option value="">Todas</option>
   <option value="Chicco">Chicco</option>
   <option value="Be safe">Be safe</option>
@@ -140,32 +150,37 @@ else {return (a, b) => b.added_to_store_at - a.added_to_store_at}
   <option value="Quinny">Quinny</option>
   <option value="Maxi-Cosi">Maxi-Cosi</option>
   </select>
-
+  </div>
+<div>
   <label htmlFor="tag">Escolha uma Tag</label>
-<select onChange = {this.handleInputChange} id="tag" name="tag" form="tag">
+<select className='productPage_select' onChange = {this.handleInputChange} id="tag" name="tag" form="tag">
   <option value="">Todas</option>
   <option value="gemeos">Gémeos</option>
   <option value="bestSeller">Best Seller</option>
   <option value="novo">Novo</option>
   <option value="flashSale">Flash Sale</option>
   </select>
-
+  </div>
+<div>
   <label htmlFor="order">Ordenar por:</label>
-<select onChange = {this.handleInputChange} id="order" name="order" form="order">
+<select className='productPage_select' onChange = {this.handleInputChange} id="order" name="order" form="order">
   <option value="rec">Mais recente</option>
   <option value="az">De A a Z</option>
   <option value="za">De Z a A</option>
   <option value="pAsc">Preço Ascendente</option>
   <option value="pDes">Preço Descendente</option>
   </select>
-
+  </div>
+  </div>  
 
         </aside>
-        <div className="product__list">
-          {this.filteredProducts.sort(this.sortingFunction).map(product => (
+        
+        <div className="productPage_content__list">
+         {this.filteredProducts.sort(this.sortingFunction).map(product => (
             <ProductItem key={product.id} updateCart={this.updateCart} {...this.props} {...product} />
           ))}
         </div>
+        </div>)}
       </div>
     );
   }

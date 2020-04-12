@@ -1,3 +1,8 @@
+## First Steps
+This Project is React-Shop, a test for The Loop.
+First clone this repository to your machine and then in the folder react-shop run the command npm start to view in your local host, port 3000.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

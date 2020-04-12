@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const instance = axios.create({
-  baseURL: 'https://cors-anywhere.herokuapp.com/' +'https://babyloop.pt/api/v1'
+  baseURL: 'https://cors-anywhere.herokuapp.com/'+'https://babyloop.pt/api/v1'
   });
 
 

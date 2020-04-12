@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
-
+import trash from './../../assets/images/trash.png'
 
 
 import './style.scss';
@@ -10,29 +10,34 @@ class CheckoutInfo extends Component {
     super(props);
     this.state = {
       product: props
-    };
     }
-  
+    this.remove = this.remove.bind(this)
+    }
+  remove() {
+this.props.removeFromCart(this.state.product)
+  }
   render(){
+    console.log('product', this.state.product)
   return (
+    <div className='card'>
     <Link
       to={`/product/${this.props.id}`}>
-    <div className='product__item'>
-      <figure className="product__image">
+    <div className='card_props' >
+      <figure className="card__image">
         <img src={this.props.product_pictures[0].picture.url} alt={this.props.base_product.name_pt} />
       </figure>
-      <header className="product__information">
-        <div className="product__details">
+      
+        <div className="card__details">
           <strong>{this.props.base_product.name_pt}</strong>
-  <img src={this.props.base_product.brand.picture.url} alt={this.props.base_product.brand.name} />
-          </div>
-        <div className="product__price">
+              
           <span>{this.props.price}€</span>
-        </div>
-      </header>
+          
+     </div>
      
       </div>
     </Link>
+    <img onClick={this.remove} className="trash" src={trash} alt='trash' />
+    </div>
   );
 };
 }
