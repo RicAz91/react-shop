@@ -5,8 +5,19 @@ $yellow:#F7AD4B;
 .product__page {
   display: flex;
   flex-direction: column;
+  @media (max-width: 400px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
  }
  .back{
+  @media (max-width: 400px) {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
   display: flex;
   justify-content: left;
   
@@ -52,6 +63,11 @@ $yellow:#F7AD4B;
       justify-content: center;
       align-self: center;
     width: 75%;
+    }
+    @media (max-width: 400px) {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
     }
   }
   
